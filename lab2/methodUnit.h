@@ -6,7 +6,11 @@
 #include <memory>
 using namespace std;
 
-class MethodUnit : public Unit { // Класс MethodUnit, наследуемый от Unit, для создания методов и определения их типов доступа в классе на С++
+class MethodUnit : public Unit  // Класс MethodUnit, наследуемый от Unit, для создания методов и определения их типов доступа в классе на С++
+{
+
+    friend class CPlusPlusMethod; //класс CPlusPlusMethod объявляем другом класса MethodUnit для того, чтобы мы могли обращаться к приватным член-данным
+
 public:
     enum Modifier { // Определение перечисления(enum) Modifier, определяющее модификаторы доступа: STATIC, CONST и VIRTUAL в виде битовых флагов.
         STATIC = 1,
@@ -17,10 +21,10 @@ public:
 public:
     MethodUnit(const string& name, const string& returnType, Flags flags) : m_name(name), m_returnType(returnType), m_flags(flags) { }
     // Конструктор класса MethodUnit принимает имя функции, тип возвращаемого значения и флаги(name, returnType, flags)
-    void add(const shared_ptr <Unit>& unit, Flags /* flags */ = 0 ); // метод для добавления элементов типа Unit в конец вектора m_body
-    string compile(unsigned int level = 0) const; //Переопределение метода, который генерирует код на с++ и возвращает строку.
-    // параметр level - уровень вложенности узла дерева для корректной расстановки отступов в начале строк генерируемого кода.
 
+    void add(const shared_ptr <Unit>& unit, Flags /* flags */ = 0 ) { // метод для добавления элементов типа Unit в конец вектора m_body
+        m_body.push_back(unit);
+    }
 private:
     string m_name; // имя класса
     string m_returnType; //возвращаемый тип
