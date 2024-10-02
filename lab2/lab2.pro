@@ -22,7 +22,10 @@ HEADERS += \
     cplusFactory.h \
     cplusMethod.h \
     cplusPrintOperator.h \
+    csharpClass.h \
     csharpFactory.h \
+    csharpMethod.h \
+    csharpPrintOperator.h \
     javaFactory.h \
     methodUnit.h \
     printOperatorUnit.h \

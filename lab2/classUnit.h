@@ -12,7 +12,12 @@ public:
     enum AccessModifier { // Определение перечисления(enum) AccessModifier для модификаторов (уровней) доступа: PUBLIC, PROTECTED, PRIVATE
         PUBLIC, //значение = 0, а последующие значения увеличиваются на 1.
         PROTECTED, // = 1
-        PRIVATE // = 2
+        PRIVATE, // = 2
+        // Типы доступа: PRIVATE_PROTECTED, INTERNAL, PROTECTED_INTERNAL используются в С#
+        PRIVATE_PROTECTED, // = 3. Член-данные доступны в своем классе и в производных для текущей сборки
+        INTERNAL, // = 4. Член-данные доступны в любом месте кода для текущей сборки, но недоступны для других сборок
+        PROTECTED_INTERNAL // = 5. Член-данные класса доступны из любого места в текущей сборке и из производных классов в других сборках
+
     };
     static const vector <string> ACCESS_MODIFIERS; // Объявление статического константного вектора из строк, содержащего модификаторы доступа типа string
 
@@ -27,4 +32,7 @@ private:
     // который содержит умные указатели shared_ptr на объекты типа Unit.
     vector <Fields> m_fields; // вектор m_fields, в котором каждый элемент является вектором, содержащим умные указатели на объекты типа Unit.
 };
+const vector <string> ClassUnit::ACCESS_MODIFIERS = {"public", "protected", "private", "private protected","internal","protected internal"};
+// Инициализация статического константного вектора из строк модификаторами доступа
+
 #endif // CLASSUNIT_H

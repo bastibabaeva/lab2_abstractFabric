@@ -10,12 +10,13 @@ class MethodUnit : public Unit  // Класс MethodUnit, наследуемый
 {
 
     friend class CPlusPlusMethod; //класс CPlusPlusMethod объявляем другом класса MethodUnit для того, чтобы мы могли обращаться к приватным член-данным
+    friend class CSharpMethod; //класс CSharpMethod объявляем другом класса MethodUnit для того, чтобы мы могли обращаться к приватным член-данным
 
 public:
     enum Modifier { // Определение перечисления(enum) Modifier, определяющее модификаторы доступа: STATIC, CONST и VIRTUAL в виде битовых флагов.
         STATIC = 1,
         CONST = 1 << 1, //сдвиг бита на 1 влево: = 10
-        VIRTUAL = 1 << 2 //сдвиг бита на 2 влево: = 100.
+        VIRTUAL = 1 << 2, //сдвиг бита на 2 влево: = 100.
     };
 
 public:
