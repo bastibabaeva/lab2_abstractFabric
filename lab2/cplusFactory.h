@@ -1,0 +1,4 @@
+#ifndef CPLUSFACTORY_H
+#define CPLUSFACTORY_H
+
+#endif // CPLUSFACTORY_H
