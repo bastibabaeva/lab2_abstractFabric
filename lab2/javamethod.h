@@ -15,7 +15,7 @@ public:
             result += "static ";
         }
         //В Java final используется вместо const, только перед именем метода. Если не final, то метод автоматически virtual
-        else if(m_flags & FINAL) { // Иначе при проверке на наличие FINAL в переменной m_flags добавляем в результат final
+        else if(m_flags & CONST) { // Иначе при проверке на наличие FINAL в переменной m_flags добавляем в результат final
             result += "final "; // Модификатор final используется для завершения реализации методов
         }
         else if(m_flags & ABSTRACT) { // Иначе при проверке на наличие ABSTRACT в переменной m_flags добавляем в результат abstract
