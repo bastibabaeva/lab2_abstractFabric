@@ -11,6 +11,9 @@ class PrintOperatorUnit : public Unit  // Класс PrintOperatorUnit, насл
     friend class CPlusPlusPrintOperator; //класс CPlusPlusPrintOperator объявляем другом класса PrintOperatorUnit для того, чтобы мы могли
         // обращаться к приватным член-данным текущего класса
     friend class CSharpPrintOperator; //класс CSharpPrintOperator объявляем другом класса PrintOperatorUnit
+    friend class JavaPrintOperator; //класс JavaPrintOperator объявляем другом класса PrintOperatorUnit
+
+
 public:
     explicit PrintOperatorUnit(const string& text) : m_text(text) { } // Конструктор неявного преобразования (explicit) принимает строку текста text
     // и член класса m_text инициализируется этим параметром

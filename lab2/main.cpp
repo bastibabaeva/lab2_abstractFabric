@@ -7,6 +7,7 @@
 #include "printOperatorUnit.h"
 #include "cplusFactory.h"
 #include "csharpFactory.h"
+#include "javaFactory.h"
 using namespace std;
 
 
@@ -35,14 +36,37 @@ string generateProgram(const shared_ptr <AbstractFactory>& factory) { // Ф-ци
             //защищённого внутреннего метода testFunc5 типа void
         //PROTECTED_INTERNAL: член-данные класса доступны из любого места в текущей сборке и из производных классов в других сборках
     }
+    // Методы 5, 6 и 7 только для C#
+    if (dynamic_cast<CSharpFactory*>(factory.get())) { // Если factory имеет тип CSharpFactory, то методы 5, 6 и 7 добавляются в класс
+        myClass->add(factory->createMethod("testFunc5", "void", MethodUnit::VIRTUAL), ClassUnit::INTERNAL); // Добавление в экземпляр myClass
+            // внутреннего виртуального метода testFunc5 типа void
+        //INTERNAL: член-данные доступны в любом месте кода для текущей сборки, но недоступны для других сборок
+        myClass->add(factory->createMethod("testFunc6", "void", MethodUnit::STATIC), ClassUnit::PROTECTED_INTERNAL); // Добавление в экземпляр myClass
+            //защищённого внутреннего статического метода testFunc6 типа void
+        //PROTECTED_INTERNAL: член-данные класса доступны из любого места в текущей сборке и из производных классов в других сборках
+        myClass->add(factory->createMethod("testFunc7", "void", 0), ClassUnit::PRIVATE_PROTECTED); // Добавление в экземпляр myClass
+            //приватного защищённого метода testFunc7 типа void
+        // PRIVATE_PROTECTED: Член-данные доступны в своем классе и в производных для текущей сборки
+    }
 
+    // Методы 8, 9, 10 только для Java
+    if (dynamic_cast<JavaFactory*>(factory.get())) { // Если factory имеет тип JavaFactory, то методы 8, 9, 10 добавляются в класс
+        myClass->add(factory->createMethod("testFunc8", "void", MethodUnit::ABSTRACT), ClassUnit::PUBLIC); // Добавление в экземпляр myClass
+            // публичного абстрактного метода testFunc8 типа void
+        //ABSTRACT: необходим для создания абстрактных методов
+        myClass->add(factory->createMethod("testFunc9", "void", MethodUnit::SYNCHRONIZED), ClassUnit::PRIVATE); // Добавление в экземпляр myClass
+            //приватного синхронизированного метода testFunc9 типа void
+        //SYNCHRONIZED: используется для указания того, что метод может быть доступен только одним потоком одновременно
+        myClass->add(factory->createMethod("testFunc10", "void", MethodUnit::FINAL), ClassUnit::PUBLIC); // Добавление в экземпляр myClass
+            //публичного финального метода testFunc10 типа void
+        //FINAL: используется для завершения реализации методов
     return myClass->compile(); // Возвращаем результат работы метода compile для экземпляра класса myClass, который генерирует код (пока на с++)
 }
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    cout << "Enter factory number (1 for C++, 2 for C#): "; //Вводим номер фабрики для генерации кода на соответствующем языке
+    cout << "Enter factory number (1 for C++, 2 for C#, 3 for Java): "; //Вводим номер фабрики для генерации кода на соответствующем языке
     int x; cin >> x;
     switch (x)
     {
@@ -53,6 +77,10 @@ int main(int argc, char *argv[])
     case 2:
         cout << "C# code:\n" << generateProgram(make_shared<CSharpFactory>()) << endl; // Выводим результат ф-ции generateProgram(), которая
         // принимает параметр - умный указатель(результат ф-ции make_shared) на С# фабрику
+        break;
+    case 3:
+        cout << "Java code:\n" << generateProgram(make_shared<JavaFactory>()) << endl; // Выводим результат ф-ции generateProgram(), которая
+        // принимает параметр - умный указатель(результат ф-ции make_shared) на Java фабрику
         break;
     default: //Если введенное значение не соответствует case
         cout << "Invalid factory number." << endl; //То неверный номер фабрики

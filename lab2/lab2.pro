@@ -27,6 +27,9 @@ HEADERS += \
     csharpMethod.h \
     csharpPrintOperator.h \
     javaFactory.h \
+    javaclass.h \
+    javamethod.h \
+    javaprintOperator.h \
     methodUnit.h \
     printOperatorUnit.h \
     unit.h
